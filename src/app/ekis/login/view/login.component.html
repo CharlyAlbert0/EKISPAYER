@@ -1,5 +1,5 @@
-
-
+<simple-notifications [options]="options"></simple-notifications>
+<app-fba></app-fba>
 <!-- <div class="row"> -->
 <nav class="navbar navbar-default" style="background-color: #52d3cd;">
   <div class="navbar-header">
@@ -60,7 +60,13 @@
 
 <div class="container animated fadeIn slow" style="width:100%" *ngIf="errorConfig">
   <div style="text-align:center">
-    <img src="/assets/images/error.gif" alt="">
+    <img [src]="UrlErrorImage" alt="" width="30%">
+  </div>
+
+</div>
+<div style="width:100%" *ngIf="!errorConfig">
+  <div style="text-align:center">
+    <img src="/assets/images/loading2.gif" alt="" width="20%">
   </div>
 
 </div>

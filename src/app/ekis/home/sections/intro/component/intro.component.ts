@@ -26,16 +26,6 @@ export class IntroComponent implements OnInit {
     document.getElementsByTagName('head')[0].appendChild(node);
  }
 
-  openMoreDev(){
- debugger
 
- //this.router.navigate(['moredev']);
-    this._DialogsService.ShowMoreDev().subscribe(data => {
-          if(data){
-
-          }
-        });
-
-  }
 
 }

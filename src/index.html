@@ -11,19 +11,6 @@
 	<meta name="keywords" content="free html5, free template, free bootstrap, html5, css3, mobile first, responsive" />
 	<meta name="author" content="FREEHTML5.CO" />
 
-	<!--
-	//////////////////////////////////////////////////////
-
-	FREE HTML5 TEMPLATE
-	DESIGNED & DEVELOPED by FREEHTML5.CO
-
-	Website: 		http://freehtml5.co/
-	Email: 			info@freehtml5.co
-	Twitter: 		http://twitter.com/fh5co
-	Facebook: 		https://www.facebook.com/fh5co
-
-	//////////////////////////////////////////////////////
--->
 
 <!-- Facebook and Twitter integration -->
 <meta property="og:title" content=""/>
@@ -53,7 +40,7 @@
 <link rel="stylesheet" href="assets/css/bootstrap.css">
 
 <!--@angular/material-ui-->
-	<link href="node_modules/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+	<link href="assets/css/indigo-pink.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <!--
@@ -78,6 +65,11 @@ You can change the style.css (default color purple) to one of these styles
 <!-- start font-awesome -->
 <link rel="stylesheet" href="assets/font-awesome-4.7.0/css/font-awesome.min.css">
 <!-- End font-awesome-->
+
+<!-- sweetalert2 -->
+	 <link rel="stylesheet" href="https://npmcdn.com/sweetalert2@4.0.15/dist/sweetalert2.min.css">
+	 <script src="https://npmcdn.com/sweetalert2@4.0.15/dist/sweetalert2.min.js"></script>
+
 
 <style>
 /* For demo purpose only */
@@ -198,10 +190,14 @@ You can change the style.css (default color purple) to one of these styles
 
 	<app-root>
 		<center>
-			<img src="/assets/images/loading2.gif" alt="">
+			<img src="/assets/images/loading2.gif" alt="" style="    width: 17%;">
 		<img src="/assets/images/loading.gif" alt="">
 	</center>
 	</app-root>
+
+
+
+
 
 	<!-- jQuery -->
 	<script src="assets/js/jquery.min.js"></script>
@@ -219,12 +215,15 @@ You can change the style.css (default color purple) to one of these styles
 	<script src="assets/js/jquery.magnific-popup.min.js"></script>
 	<script src="assets/js/magnific-popup-options.js"></script>
 	<!-- Google Map -->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
-	<script src="assets/js/google_map.js"></script>
+	<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCefOgb1ZWqYtj7raVSmN4PL2WkTrc-KyA&sensor=false"></script>
+	<script src="assets/js/google_map.js"></script> -->
 
 	<!-- For demo purposes only styleswitcher ( You may delete this anytime ) -->
 	<script src="assets/js/jquery.style.switcher.js"></script>
 	<script>
+	$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
 	$(function(){
 		$('#colour-variations ul').styleSwitcher({
 			defaultThemeId: 'theme-switch',

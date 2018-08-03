@@ -8,6 +8,7 @@ export class SystemContext{
     EndSession:boolean;
     public menuItems: any[];
     CurrentGlobalAttributes:GlobalAttributesModel[];
+    openBitacora:boolean = false;
 
 
 

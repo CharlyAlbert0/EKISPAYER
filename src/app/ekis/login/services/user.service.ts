@@ -7,58 +7,27 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 import { Observable } from 'rxjs/Observable';
 import { Injectable, Input, Output, EventEmitter } from '@angular/core';
-import { Headers, Http, RequestOptions, RequestMethod } from '@angular/http';
+import { Headers, Http, RequestOptions, RequestMethod,Response } from '@angular/http';
+import {LogsComponent} from '../../../infraestructure/logs/component/logs.component';
+import { EnumLogType,EnumLogPriority } from '../../../infraestructure/enums/enumlog';
+declare var swal: any;
 
 @Injectable()
 export class UserService {
-  private urlApi = 'http://localhost:40903/api/'
-  constructor(private http: Http) {
+  private urlApi = 'ReeplaceByConfigFile'
+  constructor(private http: Http
+              ,private logsComponent:LogsComponent) {
 
-debugger
-
-  if (localStorage.getItem('APIURL')) {
-
-      this.urlApi = localStorage.getItem('APIURL')
 
   }
 
-
-   }
-
-  // getAll() {
-  //     return this.http.get('/api/users', this.jwt()).map((response: Response) => response.json());
-  // }
-  //
-  // getById(id: number) {
-  //     return this.http.get('/api/users/' + id, this.jwt()).map((response: Response) => response.json());
-  // }
-  //
-  // create(user: User) {
-  //     return this.http.post('/api/users', user, this.jwt()).map((response: Response) => response.json());
-  // }
-  //
-  // update(user: User) {
-  //     return this.http.put('/api/users/' + user.id, user, this.jwt()).map((response: Response) => response.json());
-  // }
-  //
-  // delete(id: number) {
-  //     return this.http.delete('/api/users/' + id, this.jwt()).map((response: Response) => response.json());
-  // }
-
-  // private helper methods
-
-  // private jwt() {
-  //     // create authorization header with jwt token
-  //     let currentUser = JSON.parse(localStorage.getItem('currentUser'));
-  //     if (currentUser && currentUser.token) {
-  //         let headers = new Headers({ 'Authorization': 'Bearer ' + currentUser.token });
-  //         return new RequestOptions({ headers: headers });
-  //     }
-  // }
-
-
+  GetUrlLocalStorage(){
+    if(localStorage.getItem('APIURL')){
+        this.urlApi = localStorage.getItem('APIURL')
+    }
+  }
   InitInfo(): Observable<string>{
-    debugger
+    this.GetUrlLocalStorage();
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     // headers.append('authorization', 'bearer ' + localStorage.getItem('token'))
@@ -72,7 +41,7 @@ debugger
   }
 
   Login(user:UserModel): Observable<string>{
-    debugger
+    this.GetUrlLocalStorage();
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     // headers.append('authorization', 'bearer ' + localStorage.getItem('token'))
@@ -82,7 +51,7 @@ debugger
     // let options = new RequestOptions( {method: RequestMethod.Post, headers: headers });
     return this.http.post(this.urlApi+'LimitRules/Login?version=1',user, options)
     .map(res =>  {
-      debugger
+
       console.log(res.json());
       return res.json() as UserModel
     }).catch(this.handleError);
@@ -90,7 +59,7 @@ debugger
   }
 
   GetUsers(): Observable<UserModel[]>{
-    debugger
+
     let headers = new Headers();
     headers.append('Content-Type','application/json');
     // headers.append('authorization', 'bearer ' + localStorage.getItem('token'))
@@ -100,19 +69,43 @@ debugger
     // let options = new RequestOptions( {method: RequestMethod.Post, headers: headers });
     return this.http.post(this.urlApi+'LimitRules/GetUsers?version=1', options)
     .map(res =>  {
-      debugger
+
       console.log(res.json());
       return res.json() as UserModel[]
     }).catch(this.handleError);
 
   }
 
-  private handleError(error: any): Promise<any> {
-    debugger
-    alert('Ok: '+error.ok+', ErrorBody: '+error._body+', tipo: '+error.type+', status: '+error.status+', statusText:'+error.statusText); // for demo purposes only
-    if(error.status == 401)
-    return Promise.reject(error || error);
-  }
+  // private handleError(error: any): Promise<any> {
+  //   debugger
+  //
+  //
+  //   //swal("UserService handleError", 'Ok: '+error.ok+', tipo: '+error.type+', status: '+error.status+', statusText:'+error.statusText+', ErrorBody: '+error._body, "error");
+  //   //alert('Ok: '+error.ok+', ErrorBody: '+error._body+', tipo: '+error.type+', status: '+error.status+', statusText:'+error.statusText); // for demo purposes only
+  //   if(error.status == 401)
+  //   return //Promise.reject(error || error);
+  //   Observable.throw(error);
+  //
+  //
+  // }
+
+
+  protected handleError (error: Response | any) {
+    
+      // In a real world app, you might use a remote logging infrastructure
+      let errMsg: any;
+      if (error instanceof Response) {
+        const body = error.json() || '';
+        const err = body.error || JSON.stringify(body);
+        //errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+        errMsg =error
+      } else {
+        errMsg = error.message ? error.message : error.toString();
+      }
+      //console.clear();
+      console.error(errMsg);
+      return Observable.throw(errMsg);
+    }
 
 
 

@@ -14,7 +14,7 @@ export class AppComponent {
   constructor(location:Location,
               private http:Http){
     try{
-      debugger;
+
             this.location = location;
             //this.WebConfiguration();
 
@@ -25,21 +25,6 @@ export class AppComponent {
     }
   }
 
-  WebConfiguration(): Promise<any> {
-    return this.http.request('assets/config/webconfig.json').toPromise()
-           .then(response =>{
-               debugger
-             this.configs = response.json();
-             localStorage.setItem('APIURL', this.configs["APIURL"]);
-             localStorage.setItem('SSOURL', this.configs["SSOURL"]);
-             localStorage.setItem('ISDEVQA', this.configs["ISDEVQA"]);
-            //  APIURL=this.configs["APIURL"];
-            //  SSOURL=this.configs["SSOURL"];
-            //  IsDevQa=this.configs["ISDEVQA"];
-            //  Idle=this.configs["IDLE"];
-            //  TimeToInactivity=this.configs["TIMETOINACTIVITY"];
-            //  ShowErrorDiag=this.configs["SHOWERRORDIAG"];
-          });
-}
+  
 
 }
